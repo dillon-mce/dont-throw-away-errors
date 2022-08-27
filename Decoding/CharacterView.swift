@@ -11,8 +11,8 @@ struct Character: Codable {
     let id: Int
     let name: String
     let image: URL
-    let occupation: String
-    let voicedBy: String
+    let occupation: String?
+    let voicedBy: String?
     let wikiUrl: URL
 }
 
