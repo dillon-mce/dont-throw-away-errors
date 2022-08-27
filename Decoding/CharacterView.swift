@@ -32,13 +32,14 @@ class BobsBurgersApi {
         let url = Self.baseUrl
             .appendingPathComponent("characters")
             .appendingPathComponent("\(id)")
-        guard let (data, _) = try? await URLSession.shared.data(from: url) else {
-            print("Couldn't fetch data")
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let character = try JSONDecoder().decode(Character.self, from: data)
+            return character
+        } catch {
+            print(error)
             return nil
         }
-        let character = try? JSONDecoder().decode(Character.self, from: data)
-        if character == nil { print(String(data: data, encoding: .utf8)!) }
-        return character
     }
 }
 
