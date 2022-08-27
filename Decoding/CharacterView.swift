@@ -14,6 +14,15 @@ struct Character: Codable {
     let occupation: String?
     let voicedBy: String?
     let wikiUrl: URL
+    let relatives: [Relative]?
+}
+
+extension Character {
+    struct Relative: Codable {
+        let name: String
+        let wikiUrl: URL
+        let url: URL
+    }
 }
 
 class BobsBurgersApi {
@@ -44,6 +53,10 @@ class CharacterViewModel: ObservableObject {
 
     var title: String { character?.name ?? "" }
     var subtitle: String { character?.occupation ?? "" }
+    var subtitle2: String {
+        let relatives = character?.relatives?.map(\.name).joined(separator: ", ")
+        return relatives.map { "Relatives: \($0)" } ?? ""
+    }
     var detail: String { (character?.voicedBy).map { "Voiced by: \($0)" } ?? "" }
     var learnMore: URL { character?.wikiUrl ?? URL(string: "https://bobs-burgers.fandom.com")! }
 
@@ -70,6 +83,9 @@ struct CharacterView: View {
             Text(viewModel.title)
                 .font(.title)
             Text(viewModel.subtitle)
+            if !viewModel.subtitle2.isEmpty {
+                Text(viewModel.subtitle2)
+            }
             Text(viewModel.detail)
                 .font(.caption)
             if !viewModel.title.isEmpty {
