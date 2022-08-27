@@ -37,7 +37,7 @@ class BobsBurgersApi {
             return nil
         }
         let character = try? JSONDecoder().decode(Character.self, from: data)
-        if character == nil { print("Couldn't decode character") }
+        if character == nil { print(String(data: data, encoding: .utf8)!) }
         return character
     }
 }
