@@ -30,7 +30,7 @@ class BobsBurgersApi {
 
     func fetchCharacter(id: Int) async -> Character? {
         let url = Self.baseUrl
-            .appendingPathComponent("character")
+            .appendingPathComponent("characters")
             .appendingPathComponent("\(id)")
         guard let (data, _) = try? await URLSession.shared.data(from: url) else {
             print("Couldn't fetch data")
