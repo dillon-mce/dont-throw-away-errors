@@ -20,8 +20,8 @@ struct Character: Codable {
 extension Character {
     struct Relative: Codable {
         let name: String
-        let wikiUrl: URL
-        let url: URL
+        let wikiUrl: URL?
+        let url: URL?
     }
 }
 
