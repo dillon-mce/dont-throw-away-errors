@@ -14,12 +14,6 @@ struct Character: Codable {
     let occupation: String
     let voicedBy: String
     let wikiUrl: URL
-
-    enum CodingKeys: String, CodingKey {
-        case id, name, image, occupation
-        case voicedBy = "voiced_by"
-        case wikiUrl = "wiki_url"
-    }
 }
 
 class BobsBurgersApi {
